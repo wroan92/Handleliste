@@ -1,34 +1,35 @@
 const productList = document.querySelector("#productList");
 const productInput = document.querySelector("#productInput");
 const productSubmitBtn = document.querySelector("#productSubmit");
+const removeBtn = document.querySelector("#removeBtn");
 
 const products = ["Melk", "Saft", "Egg"];
 
-productSubmitBtn.addEventListener("click", addProduct);
+function updateProductList() {
+  productList.innerHTML = products.map(product => `<li>${product}</li>`).join('');
+}
 
-productInput.addEventListener("keypress", function (e) {
-    if (e.key === "Enter") {
-        addProduct();
+productSubmitBtn.addEventListener("click", () => {
+  products.push(productInput.value);
+  productInput.value = "";
+  updateProductList();
+});
+
+productInput.addEventListener("keypress", event => {
+    if (event.key === "Enter") {
+        products.push(productInput.value);
+        productInput.value = "";
+        updateProductList();
     }
 });
-function addProduct() {
-  console.log(productInput.value);
-  products.push(productInput.value);
 
-  productList.innerHTML = "";
-  productInput.value = "";
-
-  for (let i = 0; i < products.length; i++) {
-    productList.innerHTML += `<li>${products[i]}</li>`;
+removeBtn.addEventListener("click", () => {
+  if(products.length > 0){
+    products.pop();
+    updateProductList();
+  }else{
+    productList.innerHTML = "Ingen produkter og fjerne.";
   }
-}
-let button = document.querySelector("#removeBtn");
-
-button.addEventListener("click", () =>{
-  products.pop();
 });
-  
 
-for (let i = 0; i < products.length; i++) {
-  productList.innerHTML += `<li>${products[i]}</li>`;
-}
+updateProductList();
