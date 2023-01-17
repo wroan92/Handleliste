@@ -1,0 +1,24 @@
+html{
+    margin-top: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input{
+    padding: 0.5rem 1rem;
+}
+button{
+    padding: 0.75rem 1rem;
+    color: white;
+    border-radius: 3rem;
+    border: 0;
+}
+
+.addBtn{
+    background-color: blue;
+}
+
+.removeBtn{
+    background-color: red;
+}
