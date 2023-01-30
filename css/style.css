@@ -30,3 +30,6 @@ button{
     border-radius: 3rem;
     background-color: red;
 }
+li:hover{
+cursor: pointer;
+}
