@@ -1,34 +1,62 @@
 const productList = document.querySelector("#productList");
 const productInput = document.querySelector("#productInput");
 const productSubmitBtn = document.querySelector("#productSubmit");
+const removeBtn = document.querySelector("#removeBtn");
 
-const products = ["Melk", "Saft", "Egg"];
+let products = [];
 
-productSubmitBtn.addEventListener("click", addProduct);
-
-productInput.addEventListener("keypress", function (e) {
-    if (e.key === "Enter") {
-        addProduct();
-    }
-});
-function addProduct() {
-  console.log(productInput.value);
-  products.push(productInput.value);
-
-  productList.innerHTML = "";
+updateProductList = () => {
+  productList.innerHTML = products
+    .map(
+      (x, index) =>
+        `<li onclick="removeProduct(${index})">${x.product} <br>Ant: ${x.qty}</li><hr>`
+    )
+    .join("");
   productInput.value = "";
+};
 
-  for (let i = 0; i < products.length; i++) {
-    productList.innerHTML += `<li>${products[i]}</li>`;
+productSubmitBtn.addEventListener("click", () => {
+  const existingProduct = products.find(
+    (x) => x.product.toLowerCase() === productInput.value.toLowerCase()
+  );
+  if (existingProduct) {
+    existingProduct.qty += 1;
+  } else {
+    products.push({ product: productInput.value, qty: 1 });
   }
-}
-let button = document.querySelector("#removeBtn");
-
-button.addEventListener("click", () =>{
-  products.pop();
+  updateProductList();
 });
-  
 
-for (let i = 0; i < products.length; i++) {
-  productList.innerHTML += `<li>${products[i]}</li>`;
-}
+productInput.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    const existingProduct = products.find(
+      (x) => x.product.toLowerCase() === productInput.value.toLowerCase()
+    );
+    if (existingProduct) {
+      existingProduct.qty += 1;
+    } else {
+      products.push({ product: productInput.value, qty: 1 });
+    }
+    updateProductList();
+  }
+});
+
+removeBtn.addEventListener("click", () => {
+  if (products.length > 1) {
+    products.pop();
+    updateProductList();
+  } else {
+    productList.innerHTML = "Ingen produkter og fjerne.";
+  }
+});
+
+removeProduct = (i) => {
+  if (products.length > 1) {
+    products.splice(i, 1);
+    updateProductList();
+  } else {
+    productList.innerHTML = "Ingen produkter og fjerne.";
+  }
+};
+
+updateProductList();
