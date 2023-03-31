@@ -16,7 +16,6 @@ This is a school project for creating a shopping list web application.
 
 ## Features
 Add items to the shopping list
-Edit existing items on the shopping list
 Delete items from the shopping list
 
 ## Technologies Used
@@ -28,14 +27,16 @@ Delete items from the shopping list
 
 
 ## Getting Started
-To use this web application, simply download or clone the repository to your local machine and open index.html in your web browser.
+To use this web application, simply download or clone the repository to your local machine.
+```
+git clone https://github.com/wroan92/Handleliste.git
+```
 
 ## Usage
 To add an item to the shopping list, enter the name of the item in the "Add item" input field and click the "Add" button. The item will be added to the list.
 
-To edit an existing item on the shopping list, click on the item you wish to edit, update the name in the "Edit item" input field and click the "Save" button.
 
-To delete an item from the shopping list, click on the "x" button next to the item you wish to delete.
+To delete an item from the shopping list, click on the "remove" button to delete.
 
 
 
